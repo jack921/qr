@@ -1,4 +1,4 @@
-package com.youngport.quanzhuan;
+package com.youngport.caifutong;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

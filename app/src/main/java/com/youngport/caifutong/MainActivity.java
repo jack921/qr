@@ -1,4 +1,4 @@
-package com.youngport.quanzhuan;
+package com.youngport.caifutong;
 
 import android.Manifest;
 import android.app.Activity;
@@ -123,15 +123,13 @@ public class MainActivity extends Activity implements MyWebChomeClient.OpenFileC
             if (mUploadMsg != null) {
                 mUploadMsg.onReceiveValue(null);
             }
-
             if (mUploadMsgForAndroid5 != null) {         // for android 5.0+
                 mUploadMsgForAndroid5.onReceiveValue(null);
             }
             return;
         }
         switch (requestCode) {
-            case REQUEST_CODE_IMAGE_CAPTURE:
-            case REQUEST_CODE_PICK_IMAGE: {
+            case REQUEST_CODE_PICK_IMAGE:
                 try {
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                         if (mUploadMsg == null) {
@@ -158,7 +156,11 @@ public class MainActivity extends Activity implements MyWebChomeClient.OpenFileC
                     e.printStackTrace();
                 }
                 break;
-            }
+            case REQUEST_CODE_IMAGE_CAPTURE:
+                Uri uri = Uri.fromFile(new File(SystemUtil.getImageAbsolutePath19(MainActivity.this,SystemUtil.imageUriFromCamera)));
+//                String uri=SystemUtil.getImageAbsolutePath19(MainActivity.this,SystemUtil.imageUriFromCamera);
+                mUploadMsgForAndroid5.onReceiveValue(new Uri[]{uri});
+                 break;
         }
     }
 
@@ -216,7 +218,8 @@ public class MainActivity extends Activity implements MyWebChomeClient.OpenFileC
                                 }
                             }
                             try {
-                                mSourceIntent = ImageUtil.takeBigPicture();
+//                                mSourceIntent = ImageUtil.takeBigPicture(MainActivity.this);
+                                mSourceIntent=SystemUtil.pickImageFromCamera(MainActivity.this);
                                 startActivityForResult(mSourceIntent, REQUEST_CODE_IMAGE_CAPTURE);
                             } catch (Exception e) {
                                 Toast.makeText(MainActivity.this, "请去\"设置\"中开启本应用的相机和图片媒体访问权限", Toast.LENGTH_SHORT).show();

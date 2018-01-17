@@ -1,4 +1,4 @@
-package com.youngport.quanzhuan;
+package com.youngport.caifutong;
 
 import org.junit.Test;
 

@@ -18,9 +18,6 @@ public class WelcomeActivity extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-
-//        viewPager=(ViewPager)findViewById(R.id.welcome_viewpager);
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -28,7 +25,6 @@ public class WelcomeActivity extends AppCompatActivity{
                 finish();
             }
         },3000);
-
     }
 
 }
